@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>پنل فرماندهی عملیات ناوبری امن و ضد جَمینگ ناوگان پهپادی (GNSS-Resilient Navigation) | حسین لعلیان</title>
+  <title>پنل فرماندهی عملیات ناوبری امن و ضد جَمینگ ناوگان پهپادی | حسین لعلیان</title>
   <style>
     :root {
       --bg: #030712;
@@ -13,93 +13,312 @@
       --accent: #6366f1;
       --emerald: #10b981;
       --amber: #f59e0b;
+      --danger: #ef4444;
       --text: #f8fafc;
       --text-muted: #94a3b8;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, sans-serif; }
-    body { background-color: var(--bg); color: var(--text); padding: 16px; min-height: 100vh; }
-    .container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding: 16px; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
 
     /* Header */
-    header { background: linear-gradient(135deg, #0b1528 0%, #0f172a 100%); border: 1px solid var(--card-border); border-radius: 14px; padding: 20px; }
-    h1 { font-size: 1.25rem; color: var(--primary); margin-bottom: 8px; }
-    .status-strip { display: flex; gap: 10px; margin-top: 10px; }
-    .badge { font-size: 0.75rem; font-weight: 800; padding: 4px 10px; border-radius: 6px; background: rgba(56, 189, 248, 0.15); color: var(--primary); border: 1px solid rgba(56, 189, 248, 0.35); }
+    header { 
+      background: linear-gradient(135deg, #0b1528 0%, #0f172a 100%); 
+      border: 1px solid var(--card-border); 
+      border-radius: 14px; 
+      padding: 24px; 
+      border-right: 5px solid var(--primary);
+    }
+    h1 { font-size: 1.35rem; color: var(--primary); margin-bottom: 8px; }
+    .subtitle { color: #cbd5e1; font-size: 0.95rem; margin-bottom: 6px; }
+    .badge-proposal {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--amber);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-top: 6px;
+    }
+    .status-strip { display: flex; flex-wrap: wrap; gap: 10px; margin-top: , -apple-system, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding: 16px; min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
 
-    /* Metrics */
-    .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 16px; }
-    .metric-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 18px; border-top: 3px solid var(--primary); }
-    .metric-val { font-size: 1.5rem; font-weight: 900; margin-top: 5px; }
+    /* Header */
+    header { 
+      background: linear-gradient(135deg, #0b1528 0%, #0f172a 100%); 
+      border: 1px solid var(--card-border); 
+      border-radius: 14px; 
+      padding: 24px; 
+      border-right: 5px solid var(--primary);
+    }
+    h1 { font-size: 1.35rem; color: var(--primary); margin-bottom: 8px; }
+    .subtitle { color: #cbd5e1; font-size: 0.95rem; margin-bottom: 6px; }
+    .badge-proposal {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--amber);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-top: 6px;
+    }
+    .status-strip { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .badge { font-size: 0.75rem; font-weight: 800; padding: 4px 10px; border-radius: 6px; background: rgba(56, 189, 248, 0.15); color: var(--primary); border:  margin-bottom: 16px; }
 
-    /* Operational Center Section */
-    .ops-section { margin-top: 30px; display: flex; flex-direction: column; gap: 15px; }
-    .ops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 15px; }
-    .ops-card { background: #091220; border: 1px solid var(--card-border); padding: 20px; border-radius: 12px; }
-    .ops-title { font-size: 1rem; color: var(--amber); margin-bottom: 10px; font-weight: 800; }
-    .ops-text { font-size: 0.85rem; line-height: 1.7; color: #cbd5e1; }
+    .action-btn-item {
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--card-bg);
+      transition: all 0.3s ease;
+    }
+    .action-btn-item:hover { border-color: var(--primary); }
     
-    footer { margin-top: 30px; text-align: center; color: var(--text-muted); font-size: 0.8rem; }
+    .action-btn-trigger {
+      width: 100%;
+      text-align: right;
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .action-btn-trigger .btn-label { display: flex; align-items: center; gap: 10px; color: var(--primary); }
+    .action-btn-trigger .arrow { transition: transform 0.3s ease; color: var(--amber); }
+    .action-btn-trigger.active .arrow { transform: rotate(180deg); }
+
+    .action-btn-content {
+      display: none;
+      padding: 20px;
+      border-top: 1px solid var(--card-border);
+      background: #060e1c;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+    .action-btn-content.open { display: block; }
+    .action-btn-content h4 { color: var(--amber); margin-bottom: 8px; font-size: 1rem; }
+    .action-btn-content p { margin-bottom: 10px; }
+    .action-btn-content ul { margin-right: 20px; margin-bottom: 10px; }
+    .action-btn-content li { margin-bottom: 6px; }
+
+    /* Statement Notice */
+    .demo-notice {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px dashed #334155;
+      padding: 16px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      color: #94a3b8;
+      line-height: 1.7;
+      text-align: justify;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .contact-email { color: var(--primary); font-weight: bold; text-decoration: none; }
   </style>
 </head>
 <body>
 
 <div class="container">
+
+  <!-- هدر و مشخصات رسمی -->
   <header>
-    <h1>پنل عملیاتی ناوبری امن و ضد جَمینگ (Anti-Jamming GNSS Resilient)</h1>
-    <div style="font-size: 0.9rem;">طراحی و توسعه: حسین لعلیان (رتبه ۳۲ کنکور دکتری)</div>
+    <h1>پنل، داشبورد و پلتفرم فرماندهی عملیات ناوبری امن و ضد جَمینگ/اسپوفینگ ناوگان‌های بدون سرنشین</h1>
+    <div class="subtitle">طراحی، پیاده‌سازی و هدایت علمی: مهندس حسین لعلیان (رتبه ۳۲ کنکور دکتری)</div>
+    <div class="badge-proposal">برگرفته از پرپوزال حسین لعلیان سال ۱۳۹۵</div>
     <div class="status-strip">
-      <span class="badge">SECURE MODE: ACTIVE</span>
-      <span class="badge">JAMMING DETECTION: ON</span>
+      <span class="badge">SECURE GNSS: RESILIENT</span>
+      <span class="badge emerald">ANTI-SPOOFING FILTER: ACTIVE</span>
+      <span class="badge">INS/OPTICAL DEAD-RECKONING: STANDBY</span>
+      <span class="badge">OPERATIONAL LINK: ENCRYPTED</span>
     </div>
   </header>
 
-  <div class="metrics-grid">
-    <div class="metric-card"><div style="font-size: 0.8rem; color: var(--text-muted);">دقت موقعیت‌سنجی (CEP)</div><div class="metric-val">1.2m</div></div>
-    <div class="metric-card"><div style="font-size: 0.8rem; color: var(--text-muted);">وضعیت لینک ماهواره‌ای</div><div class="metric-val" style="color: var(--emerald);">Stable</div></div>
+  <!-- کارت‌های پایش تلمتری -->
+  <div class="telemetry-grid">
+    <div class="metric-card">
+      <div class="metric-title">دقت تخمین موقعیت (CEP)</div>
+      <div class="metric-val" style="color: var(--emerald);">0.85 m</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-title">شاخص سلامت سیگنال (SNR / C/N0)</div>
+      <div class="metric-val">44.2 dB-Hz</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-title">سطح نویز محیطی / جَمینگ</div>
+      <div class="metric-val" style="color: var(--amber);">-112 dBm</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-title">وضعیت سوییچینگ INS / GNSS</div>
+      <div class="metric-val" style="color: var(--primary);">HYBRID FUSION</div>
+    </div>
   </div>
 
-  <!-- مرکز عملیاتی و پشتیبانی (۵ بخش تخصصی) -->
+  <!-- بخش ۵ دکمه تعاملی و عملیاتی بازنویسی‌شده بر مبنای ناوبری امن پهپاد -->
   <section class="ops-section">
-    <h2 style="text-align: center; margin-bottom: 10px;">مرکز عملیاتی و پشتیبانی ناوگان</h2>
-    <div class="ops-grid">
-        
-      <!-- دکمه ۱ -->
-      <div class="ops-card">
-        <div class="ops-title">۱. طرح توجیهی عملیاتی پلتفرم</div>
-        <p class="ops-text">کاهش فوری ریسک از دست رفتن ناوگان و مدیریت بحران جنگ الکترونیک. صنایع امروز با تهدید «ربایش پهپاد توسط جَمینگ» و «انحراف مسیر توسط اسپوفینگ» مواجهند. این پلتفرم با پیاده‌سازی مغز متفکر ناوبری هوشمند، مسیرهای امن را جایگزین مسیرهای آلوده کرده و از سقوط یا ربایش ناوگان جلوگیری می‌کند.</p>
-      </div>
+    <div class="ops-header-title">مرکز عملیاتی، فنی و حقوقی پلتفرم ناوبری امن ناوگان (UAV-Navigation-AI)</div>
+    <div class="ops-header-subtitle">جهت مشاهده جزئیات توجیهی، نحوه عملکرد، معماری عملیاتی و مدل‌های قراردادی روی هر بخش کلیک کنید:</div>
 
-      <!-- دکمه ۲ -->
-      <div class="ops-card">
-        <div class="ops-title">۲. مکانیزم کاری و ارزش پیشنهادی</div>
-        <p class="ops-text">پایش و مدل‌سازی در لحظه سیگنال‌های GNSS. راهکار ما: «حذف اثر جَمینگ»؛ مهار خودکار انحراف مسیر از طریق فیلتر کالمن تطبیقی و سوئیچینگ آنی به ناوبری اینرسی (INS) در صورت تشخیص تهدید. اتصال مستقیم خروجی پلتفرم (MavLink/Industrial) به اتوپایلوت‌ها جهت صدور فرمان بازگشت ایمن.</p>
+    <!-- دکمه ۱ -->
+    <div class="action-btn-item">
+      <button class="action-btn-trigger" onclick="toggleOps('btn1')">
+        <span class="btn-label">
+          <span>🔘 دکمه ۱:</span>
+          <span>طرح توجیهی عملیاتی پلتفرم (کاهش ریسک سرنگونی و مدیریت بحران جنگ الکترونیک)</span>
+        </span>
+        <span class="arrow" id="arrow-btn1">▼</span>
+      </button>
+      <div class="action-btn-content" id="btn1">
+        <h4>کاهش فوری ریسک از دست رفتن ناوگان و مدیریت بحران جنگ الکترونیک</h4>
+        <p><strong>معرفی سامانه فرماندهی ناوبری امن ناوگان‌های بدون سرنشین (UAV-Navigation-AI):</strong></p>
+        <p>صنایع دفاعی، امنیتی و ناوگان‌های نقشه برداری/پایش خطوط امروز با دو تهدید عملیاتی و مالی مرگبار در حوزه ناوبری مواجهند:</p>
+        <ul>
+          <li><strong>۱. ربایش پهپاد و انحراف عمدی ناشی از حملات فریب ماهواره‌ای (GNSS Spoofing):</strong> که منجر به فرود اجباری پرنده در خاک دشمن یا انهدام مأموریت می‌گردد.</li>
+          <li><strong>۲. سقوط فاجعه‌بار ناشی از جَمینگ و قطع کامل ارتباط رادیویی و GNSS (Denial of Service):</strong> که منجر به سردرگمی فلایت‌کنترلر و اتلاف کامل دارایی پرنده می‌شود.</li>
+        </ul>
+        <p><strong>راهکار سامانه:</strong> پیاده‌سازی مغز متفکر نرم‌افزاری و هوش مصنوعی لبه روی سیستم اویونیک و اتوپایلوت پرنده برای تشخیص در کسری از ثانیه (Sub-second)، ایزوله‌سازی سیگنال آلوده و اولویت‌بندی ناوبری امن بر پایه تلفیق سنسوری چندگانه بدون وابستگی به ماهواره.</p>
+        <p><strong>این داشبورد روی ناوگان چه کاری انجام می‌دهد؟</strong></p>
+        <ul>
+          <li><strong>حذف هوشمند اثر جَمینگ (Anti-Jamming Switching):</strong> زمانی که شدت امواج جَمینگ به آستانه بحرانی می‌رسد، سامانه فوراً اتوپایلوت را از مد GNSS خارج کرده و ناوبری اینرسی پیشرفته (INS) و جریان نوری (Optical Flow) را در مدار قرار می‌دهد تا انحراف مسیر به صفر نزدیک شود.</li>
+          <li><strong>تخصیص بهینه منابع ناوبری:</strong> در هر لحظه، بسته به پایداری لینک، سلامت ماهواره‌ها و نویز رادیویی، معتبرترین ترکیب سنسوری را جهت حفظ مسیر مأموریت و بازگشت خودکار پرنده (RTH) انتخاب می‌نماید.</li>
+        </ul>
       </div>
-
-      <!-- دکمه ۳ -->
-      <div class="ops-card">
-        <div class="ops-title">۳. مسیر عملیاتی پلتفرم</div>
-        <p class="ops-text">دیده‌بانی چندمنظوره: سیستم ما در لحظه پارامترهای سیگنال، نویز محیطی و پایداری موقعیت را پایش می‌کند. «الگوریتم بازگشت امن»: وقتی سیستم تشخیص دهد سیگنال GNSS تحت حمله اسپوفینگ قرار گرفته، بلافاصله کنترل را به سنسورهای محلی (Optical Flow/IMU) می‌سپارد تا پهپاد بدون نیاز به جی‌پی‌اس به مبدأ بازگردد.</p>
-      </div>
-
-      <!-- دکمه ۴ -->
-      <div class="ops-card">
-        <div class="ops-title">۴. نکات کلیدی قرارداد</div>
-        <p class="ops-text">۱. محدوده مسئولیت: عملکرد سامانه بر مبنای سلامت سنسورهای سخت‌افزاری است و اختلال فیزیکی تجهیزات خارج از مسئولیت پلتفرم است. ۲. محرمانگی (NDA): داده‌های پروازی و الگوهای ناوبری محرمانه است. ۳. فاز پایلوت: یک دوره آزمایش ۱ ماهه (Proof of Concept) با معیارهای KPI برای ارزیابی میزان موفقیت در دفع جَمینگ توافق می‌گردد.</p>
-      </div>
-
-      <!-- دکمه ۵ -->
-      <div class="ops-card">
-        <div class="ops-title">۵. مدل‌های پیشنهادی ما</div>
-        <p class="ops-text">مدل اول: قرارداد تسهیم صرفه‌جویی در عملیات (Shared Savings)؛ هزینه بر اساس تعداد سورتی پروازهای امن و موفقیت‌آمیز در مناطق پرخطر محاسبه می‌شود. <br> مدل دوم: فروش لایسنس نرم‌افزاری سازمانی (Enterprise License + Annual Maintenance) برای استفاده دائم در ناوگان‌های بزرگ.</p>
-      </div>
-
     </div>
+
+    <!-- دکمه ۲ -->
+    <div class="action-btn-item">
+      <button class="action-btn-trigger" onclick="toggleOps('btn2')">
+        <span class="btn-label">
+          <span>🔘 دکمه ۲:</span>
+          <span>مکانیزم کاری و ارزش پیشنهادی سامانه در مواجهه با جنگ الکترونیک</span>
+        </span>
+        <span class="arrow" id="arrow-btn2">▼</span>
+      </button>
+      <div class="action-btn-content" id="btn2">
+        <h4>مسئله روز عملیات‌های بدون سرنشین و ارزش پیشنهادی اختصاصی</h4>
+        <p><strong>مسئله روز مأموریت‌های هوایی:</strong> تحمیل خسارات سنگین ناشی از قطع ارتباط ناوبری، حملات جنگ الکترونیک (EW)، جعل موقعیت مکانی (Spoofing) و از دست رفتن پهپادهای گران‌قیمت سازمانی در مناطق ناشناخته.</p>
+        <p><strong>راهکار سامانه ما:</strong></p>
+        <ul>
+          <li><strong>دیده‌بانی یکپارچه:</strong> پایش و اعتبارسنجی در لحظه سیگنال‌های دریافتی از صورت‌های فلکی GPS/GLONASS/Galileo، تحلیل نسبت سیگنال به نویز (C/N0)، پایش شتاب‌سنج‌ها، ژیروسکوپ‌ها، مغناطیس‌سنج و سرعت‌سنج بادسنجی.</li>
+          <li><strong>حذف اثر اسپوفینگ و جَمینگ:</strong> مهار خودکار خطاهای ناشی از فریب سیگنالی از طریق فیلتر کالمن توسعه‌یافته (EKF) و الگوریتم تطبیقی فازی-عصبی (ANFIS) جهت رد داده‌های جعلی ماهواره و جلوگیری صددرصدی از فریب کنترلر پرواز.</li>
+          <li><strong>ناوبری بدون اتکا به جی‌پی‌اس (GPS-Denied Navigation):</strong> تکیه بر تخمین بن‌بست مرده (Dead Reckoning) همراه با هوش مصنوعی تصحیح رانش IMU برای تداوم پرواز ایمن حتی در خاموشی مطلق ماهواره.</li>
+          <li><strong>ارتباط مستقیم صنعتی و اویونیک:</strong> قابلیت اتصال خروجی پلتفرم از طریق Industrial IoT، پروتکل‌های استاندارد اویونیک و پهپادی نظیر <strong>MavLink</strong>، <strong>CAN Bus</strong>، <strong>Serial RS422/485</strong> به فلایت‌کنترلرها (Pixhawk/Industrial FC) جهت صدور آنی فرامین تصحیح مسیر و بازگشت اضطراری.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- دکمه ۳ -->
+    <div class="action-btn-item">
+      <button class="action-btn-trigger" onclick="toggleOps('btn3')">
+        <span class="btn-label">
+          <span>🔘 دکمه ۳:</span>
+          <span>مسیر عملیاتی پلتفرم و الگوریتم‌های مهار تهدید در لحظه پرواز</span>
+        </span>
+        <span class="arrow" id="arrow-btn3">▼</span>
+      </button>
+      <div class="action-btn-content" id="btn3">
+        <h4>معماری پردازشی گام‌به‌گام سامانه در حین عملیات</h4>
+        <ul>
+          <li><strong>۱. دیده‌بانی چندمنظوره:</strong> سیستم ما در لحظه پارامترهای تداخل رادیویی، تغییرات غیرطبیعی داپلر، پرش‌های ناگهانی در موقعیت مکانی و همبستگی داده‌های ژیروسکوپ با خروجی ماهواره را رصد می‌کند.</li>
+          <li><strong>۲. الگوریتم کاهش ریسک و واکنش سریع به جَمینگ:</strong> هنگامی که پرنده به محدوده آلوده به جَمینگ یا جنگ الکترونیک نزدیک می‌شود، الگوریتم فوراً مد اضطراری را فعال کرده، با قطع وابستگی به ماهواره، خطاهای انباشته‌شده INS را فیلتر کرده تا تعادل دینامیکی پرنده حفظ گردد.</li>
+          <li><strong>۳. الگوریتم بازگشت امن خودکار (Fail-Safe RTH):</strong> مشخص می‌کند در هر ثانیه از بحران، امن‌ترین مسیر برگشت به نقطه آغازین یا نقطه فرود اضطراری بدون تکیه بر ماهواره، بر پایه نقشه‌خوانی تصویری (Visual Odometry) و داده‌های اینرسی پایدار طی شود.</li>
+          <li><strong>۴. خروجی آماده فرماندهی و کنترل:</strong> این داشبورد فقط یک صفحه نمایش نیست؛ APIها و فرمت‌های فرمانی آن مستقیماً به سامانه‌های C2 (فرماندهی و کنترل)، ایستگاه زمینی پرواز (GCS) و محرک‌های سطوح کنترل پرنده فرمان اصلاح زاویه، افزایش توان موتور یا اجرای دستورات اضطراری ارسال می‌کنند.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- دکمه ۴ -->
+    <div class="action-btn-item">
+      <button class="action-btn-trigger" onclick="toggleOps('btn4')">
+        <span class="btn-label">
+          <span>🔘 دکمه ۴:</span>
+          <span>نکات کلیدی قرارداد، تضمین محرمانگی و فاز پایلوت</span>
+        </span>
+        <span class="arrow" id="arrow-btn4">▼</span>
+      </button>
+      <div class="action-btn-content" id="btn4">
+        <h4>اصول حقوقی، مهندسی و الزامات همکاری</h4>
+        <ul>
+          <li><strong>۱. محدوده مسئولیت (Disclaimer):</strong> قید می‌گردد که عملکرد نرم‌افزار پلتفرم مبتنی بر سلامت حسگرها و ادوات سخت‌افزاری پرنده (تغذیه سنسور، سلامت چیپ IMU و سیم‌کشی‌ها) است و عیوب سخت‌افزاری فیزیکی پرنده یا تخریب سازه در اثر انفجار خارج از مسئولیت مستقیم الگوریتم‌های ناوبری امن است.</li>
+          <li><strong>۲. محرمانگی کامل داده‌ها (Strict NDA):</strong> کلیه داده‌های تلمتری پروازی، مختصات مناطق عملیاتی، لاگ‌های سیگنالی و ساختار مأموریت‌های کارفرما کاملاً محرمانه تلقی شده و پروتکل‌های رمزنگاری داده تضمین می‌گردد.</li>
+          <li><strong>۳. فاز پایلوت مشروط (Proof of Concept):</strong> برای اثبات شفاف کارایی، یک دوره آزمایش ۱ ماهه میدانی یا شبیه‌سازی سخت‌افزار در حلقه (HIL) با تعیین KPIهای عددی (نظیر میزان خطای حداکثر ۱ متر در سناریوی جَمینگ کامل به مدت ۱۰ دقیقه) توافق و اجرا می‌گردد.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- دکمه ۵ -->
+    <div class="action-btn-item">
+      <button class="action-btn-trigger" onclick="toggleOps('btn5')">
+        <span class="btn-label">
+          <span>🔘 دکمه ۵:</span>
+          <span>مدل‌های پیشنهادی مشارکت تجاری و استقرار سازمانی</span>
+        </span>
+        <span class="arrow" id="arrow-btn5">▼</span>
+      </button>
+      <div class="action-btn-content" id="btn5">
+        <h4>مدل‌های تجاری متناسب با سطح نیاز کارفرما</h4>
+        <p><strong>مدل اول: قرارداد تسهیم صرفه‌جویی و موفقیت عملیات (Mission Success / Shared Savings)</strong><br>
+        اگر کارفرما مایل به پرداخت هزینه اولیه سنگین نیست، ماژول هوشمند ناوبری امن به‌صورت پایلوت روی تعدادی از پرنده‌های ناوگان مستقر می‌گردد. در ازای تضمین بازگشت سالم پرنده‌ها از مأموریت‌های پرخطر و دفع حملات جنگ الکترونیک که مانع از نابودی تجهیزات میلیاردی می‌شود، درصدی مشخص از ارزش حفظ ناوگان یا تعرفه ثابت به ازای هر ساعت سورتی پرواز موفق به تیم تحقیق و توسعه تعلق می‌گیرد.</p>
+        
+        <p><strong>مدل دوم: واگذاری لایسنس سازمانی اختصاصی (Enterprise License + Annual Maintenance)</strong><br>
+        تحویل پکیج کامل نرم‌افزار، لایه‌های هوش مصنوعی، به‌روزرسانی مداوم ماژول‌های شناسایی الگوهای جدید جَمینگ، پشتیبانی ۲۴/۷ فنی و ادغام کامل با ایستگاه‌های کنترل زمینی اختصاصی کارفرما.</p>
+      </div>
+    </div>
+
   </section>
 
+  <!-- بیانیه فنی رسمی -->
+  <div class="demo-notice">
+    <strong>بیانیه فنی (Demo Verification):</strong> جهت ممانعت از کپی‌برداری غیرمجاز و حفظ حقوق مالکیت فکری، این پنلها؛ پلتفرمها و داشبوردهای ارائه‌شده صرفاً یک دمو با داده‌های نمونه و تقلیل‌یافته (Synthetic/Minimal) می‌باشد. که در صورت ثبت سفارش صنعتی، پنل، پلتفرم و داشبورد نهایی شما بصورت تکاملی توسعه یافته و از طریق پروتکل‌های سخت‌افزاری صنعتی (HIL) به لبه‌های پردازشی واقعی (Real-Time Sensors Edge)، داده‌های واقعی و مدل‌های شبیه‌ساز Simulink متصل می‌گردد تا کمترین ضریب خطا محاسبه شود. و هر زمان پل واقعی Simulink/HIL و سنسورهای هوش مصنوعی لبه فدرال متصل شود، سیستم شما آماده دریافت اطلاعات زنده خواهد بود.
+  </div>
+
+  <!-- فوتر و راه‌های ارتباطی -->
   <footer>
-    مدیر عامل حسین لعلیان - رایانامه: ai.algorithms.ballistics@gmail.com
+    <div>شرکت صنایع پردرآمد تهرانیها | تولیدکننده داشبوردها و پلتفرم‌های هوش مصنوعی</div>
+    <div>مدیر عامل و طراح سامانه: <strong>مهندس حسین لعلیان</strong> (رتبه ۳۲ کنکور دکتری)</div>
+    <div>برگرفته از پرپوزال حسین لعلیان سال ۱۳۹۵</div>
+    <div>رایانامه ارتباط رسمی: <a class="contact-email" href="mailto:ai.algorithms.ballistics@gmail.com">ai.algorithms.ballistics@gmail.com</a></div>
   </footer>
+
 </div>
+
+<!-- اسکریپت عملکرد باز و بسته شدن تعاملی دکمه‌ها -->
+<script>
+  function toggleOps(id) {
+    const content = document.getElementById(id);
+    const arrow = document.getElementById('arrow-' + id);
+    const trigger = arrow.parentElement;
+    
+    if (content.classList.contains('open')) {
+      content.classList.remove('open');
+      trigger.classList.remove('active');
+    } else {
+      content.classList.add('open');
+      trigger.classList.add('active');
+    }
+  }
+</script>
 
 </body>
 </html>
