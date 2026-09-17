@@ -1,515 +1,57 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>پنل فرماندهی عملیات ناوبری امن و ضد جَمینگ/اسپوفینگ ناوگان‌های بدون سرنشین (Anti-Jamming GNSS Resilient Navigation) | حسین لعلیان</title>
-  <style>
-    :root {
-      --bg: #060b13;
-      --card-bg: #0d1522;
-      --card-border: #1b283d;
-      --primary: #38bdf8;
-      --emerald: #10b981;
-      --amber: #f59e0b;
-      --rose: #ef4444;
-      --purple: #a855f7;
-      --text: #f1f5f9;
-      --text-muted: #94a3b8;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      padding: 16px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    header {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 25px rgba(0,0,0,0.6);
-    }
-    .header-top {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-    h1 {
-      font-size: 1.15rem;
-      line-height: 1.6;
-      color: #fff;
-      margin-bottom: 6px;
-    }
-    .subtitle {
-      font-size: 0.88rem;
-      color: var(--primary);
-      font-weight: 600;
-    }
-    .badges {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .badge {
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .badge-anfis {
-      background: rgba(168, 85, 247, 0.15);
-      color: var(--purple);
-      border: 1px solid rgba(168, 85, 247, 0.3);
-    }
-    .badge-status {
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--emerald);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-    .badge-hil {
-      background: rgba(56, 189, 248, 0.15);
-      color: var(--primary);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-    }
+<!-- در انتهای پنل، قبل از تگ </body> این بخش را اضافه کنید -->
+<section style="margin-top: 40px; padding: 20px; border-top: 2px solid #1e293b;">
+    <h2 style="color: #38bdf8; text-align: center; margin-bottom: 25px;">مرکز عملیاتی و پشتیبانی پلتفرم</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+        
+        <!-- دکمه ۱ -->
+        <div style="background: #0b1526; border: 1px solid #1e293b; padding: 20px; border-radius: 12px;">
+            <h3 style="color: #f59e0b; margin-bottom: 10px;">طرح توجیهی عملیاتی پلتفرم</h3>
+            <p style="font-size: 0.9rem; line-height: 1.6; color: #cbd5e1;">
+                <strong>کاهش ریسک از دست رفتن ناوگان و مدیریت بحران جنگ الکترونیک</strong><br>
+                صنایع دفاعی و امنیتی امروز با دو تهدید جدی روبرویند: ۱. ربایش و کنترل‌ناپذیری پهپاد ناشی از حملات جَمینگ (Jamming). ۲. انحراف مسیر ناشی از اسپوفینگ (Spoofing) که منجر به سقوط یا از دست رفتن دارایی می‌شود. این پلتفرم با پیاده‌سازی مغز متفکر ناوبری هوشمند، مسیرهای امن را جایگزین مسیرهای آلوده کرده و بقای ناوگان را تضمین می‌کند.
+            </p>
+        </div>
 
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-    }
-    .metric-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .metric-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-    .metric-value {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #fff;
-    }
-    .metric-desc {
-      font-size: 0.75rem;
-      color: var(--primary);
-    }
+        <!-- دکمه ۲ -->
+        <div style="background: #0b1526; border: 1px solid #1e293b; padding: 20px; border-radius: 12px;">
+            <h3 style="color: #38bdf8; margin-bottom: 10px;">مکانیزم کاری و ارزش پیشنهادی</h3>
+            <p style="font-size: 0.9rem; line-height: 1.6; color: #cbd5e1;">
+                <strong>راهکار سامانه ما:</strong><br>
+                تلفیق سنسوری چندلایه (Sensor Fusion): پایش همزمان GNSS/INS و Optical Flow برای تشخیص ناهنجاری در داده‌های مکان‌یابی.
+                حذف اثر جَمینگ: مهار خودکار انحراف مسیر از طریق فیلتر کالمن تطبیقی و سوئیچینگ آنی به ناوبری اینرسی (INS) در صورت تشخیص تهدید.
+                ارتباط صنعتی: قابلیت اتصال خروجی پلتفرم به اتوپایلوت‌های استاندارد (Pixhawk/MavLink) جهت صدور فرمان بازگشت ایمن یا تغییر مسیر خودکار.
+            </p>
+        </div>
 
-    .main-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 14px;
-    }
-    @media (max-width: 950px) {
-      .main-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    .panel-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .panel-header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 8px;
-    }
-    .panel-card h3 {
-      font-size: 0.95rem;
-      color: var(--primary);
-    }
-    .test-btn {
-      background: #1e293b;
-      border: 1px solid var(--rose);
-      color: var(--rose);
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      cursor: pointer;
-      font-weight: 700;
-      transition: all 0.2s;
-    }
-    .test-btn:hover {
-      background: var(--rose);
-      color: #fff;
-    }
+        <!-- دکمه ۳ -->
+        <div style="background: #0b1526; border: 1px solid #1e293b; padding: 20px; border-radius: 12px;">
+            <h3 style="color: #10b981; margin-bottom: 10px;">مسیر عملیاتی پلتفرم</h3>
+            <p style="font-size: 0.9rem; line-height: 1.6; color: #cbd5e1;">
+                <strong>دیده‌بانیpx solid #1e293b; padding: 20px; border-radius: 12px;">
+            <h3 style="color: #38bdf8; margin-bottom: 10px;">مکانیزم کاری و ارزش پیشنهادی</h3>
+            <p style="font-size: 0.9rem; line-height: 1.6; color: #cbd5e1;">
+                <strong>راهکار سامانه ما:</strong><br>
+                تلفیق سنسوری چندلایه (Sensor Fusion): پایش همزمان GNSS/INS و Optical Flow برای تشخیص ناهنجاری در داده‌های مکان‌یابی.
+                حذف اثر جَمینگ: مهار خودکار انحراف مسیر از طریق فیلتر کالمن تطبیقی و سوئیچینگ آنی به ناوبری اینرسی (INS) در صورت تشخیص تهدید.
+                ارتباط صنعتی: قابلیت اتصال خروجی پلتفرم به اتوپایلوت‌های استاندارد (Pixhawk/MavLink) جهت صدور فرمان بازگشت ایمن یا تغییر مسیر خودکار.
+            </p>
+        </div>
 
-    canvas {
-      width: 100%;
-      height: 250px;
-      background: #04070f;
-      border-radius: 8px;
-      border: 1px solid #16243d;
-    }
-    .terminal {
-      background: #04070f;
-      border: 1px solid #16243d;
-      border-radius: 8px;
-      padding: 12px;
-      font-family: monospace;
-      font-size: 0.78rem;
-      color: #38bdf8;
-      height: 250px;
-      overflow-y: auto;
-      line-height: 1.7;
-    }
+        <!-- دکمه ۳ -->
+        <div style="background: #0b1526; border: 1px solid #1e293b; padding: 20px; border-radius: 12px;">
+            <h3 style="color: #10b981; margin-bottom: 10px;">مسیر عملیاتی پلتفرم</h3>
+            <p style="font-size: 0.9rem; line-height: 1.6; color: #cbd5e1;">
+                <strong>دیده‌بانی و مقابله:</strong><br>
+                سیستم ما در لحظه پارامترهای سیگنال‌های دریافتی، موقعیت‌سنجی اینرسی و خطای موقعیت را مانیتور می‌کند.
+                الگوریتم ضد جَمینگ: به محض شناسایی پارازیت فعال یا تزریق سیگنال غلط، سیستم فوراً مسیر پروازی جدید (Safe-Path) را محاسبه کرده و کنترل پرواز را به حالت93b; padding: 20px; border-radius: 12px;">
+            <h3 style="color: #6366f1; margin-bottom: 10px;">مدل‌های استقرار پلتفرم</h3>
+            <p style="font-size: 0.9rem; line-height: 1.6; color: #cbd5e1;">
+                <strong>مدل اول (اشتراک عملیاتی):</strong> پلتفرم روی ناوگان شما به صورت پایلوت نصب می‌شود و متناسب با تعداد سورتی پروازهای امن انجام شده، هزینه عملیاتی محاسبه می‌گردد.
+                <br><br>
+                <strong>مدل دوم (لایسنس سازمانی):</strong> فروش لایسنس دائمی نرم‌افزاری به همراه پکیج به‌روزرسانی سالانه (Annual Maintenance) جهت آپدیت الگوریتم‌های ضد جَمینگ متناسب با متدهای جدید جنگ الکترونیک.
+            </p>
+        </div>
 
-    .telemetry-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
-    }
-    .telemetry-box {
-      background: #09111c;
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      padding: 12px;
-    }
-    .telemetry-title {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-    .telemetry-val {
-      font-size: 1.15rem;
-      font-weight: bold;
-      color: #fff;
-    }
-    .telemetry-status {
-      font-size: 0.72rem;
-      color: var(--emerald);
-      margin-top: 4px;
-    }
-
-    .disclaimer-card {
-      background: #09111e;
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 16px;
-    }
-    .disclaimer-title {
-      font-size: 0.9rem;
-      font-weight: bold;
-      color: var(--amber);
-      margin-bottom: 8px;
-    }
-    .disclaimer-text {
-      font-size: 0.84rem;
-      line-height: 1.8;
-      color: #cbd5e1;
-      text-align: justify;
-    }
-    footer {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 16px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-    footer a {
-      color: var(--primary);
-      text-decoration: none;
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <div class="header-top">
-      <div>
-        <h1>پنل فرماندهی عملیات ناوبری امن و ضد جَمینگ/اسپوفینگ ناوگان‌های بدون سرنشین (Anti-Jamming GNSS Resilient Navigation)</h1>
-        <div class="subtitle">طراحی و توسعه مهندسی: حسین لعلیان (رتبه ۳۲ کنکور دکتری)</div>
-      </div>
-      <div class="badges">
-        <span class="badge badge-anfis">● ANFIS & METAHEURISTIC FUSION</span>
-        <span class="badge badge-status" id="systemStateBadge">● وضعیت ناوبری: امن (INS/GNSS Fused)</span>
-        <span class="badge badge-hil">SIMULINK / HIL READY</span>
-      </div>
     </div>
-  </header>
-
-  <div class="metrics-grid">
-    <div class="metric-card">
-      <div class="metric-label">وضعیت تهدید جنگ الکترونیک (EW Threat Level)</div>
-      <div class="metric-value" style="color: var(--emerald);" id="threatVal">عادی (Normal)</div>
-      <div class="metric-desc">پایش طیف RF باندهای L1/L2 GNSS</div>
-    </div>
-
-    <div class="metric-card">
-      <div class="metric-label">حالت سنسور فیوژن (Navigation Mode)</div>
-      <div class="metric-value" id="modeVal">تلفیقی (GNSS+INS)</div>
-      <div class="metric-desc">فیلتر کالمن تطبیقی هوشمند (A-EKF)</div>
-    </div>
-
-    <div class="metric-card">
-      <div class="metric-label">خطای تخمین موقعیت متری (CEP 95%)</div>
-      <div class="metric-value" style="color: var(--emerald);" id="cepVal">۰.۴۲ متر</div>
-      <div class="metric-desc">تثبیت‌شده توسط مدل استنتاج فازی ANFIS</div>
-    </div>
-
-    <div class="metric-card">
-      <div class="metric-label">صحت سیگنال ماهواره‌ای (Integrity Metric)</div>
-      <div class="metric-value" id="integrityVal">۹۸.۶ ٪</div>
-      <div class="metric-desc">تعداد ماهواره قفل: ۱۸ عدد (GPS/GLONASS)</div>
-    </div>
-  </div>
-
-  <div class="telemetry-grid">
-    <div class="telemetry-box">
-      <div class="telemetry-title">واحد ناوبری اینرسی (INS Dead Reckoning)</div>
-      <div class="telemetry-val" id="insDrift">Drift: &lt; ۰.۰۵ m/s</div>
-      <div class="telemetry-status">● آماده‌باش در صورت قطع GNSS</div>
-    </div>
-    <div class="telemetry-box">
-      <div class="telemetry-title">دید کامپیوتری / جریان نوری (Optical Odometry)</div>
-      <div class="telemetry-val">پیوستگی تصویر: ۹۹.۱ ٪</div>
-      <div class="telemetry-status">● قفل عوارض زمین (Feature Tracking)</div>
-    </div>
-    <div class="telemetry-box">
-      <div class="telemetry-title">نسبت سیگنال به نویز ماهواره (C/N0)</div>
-      <div class="telemetry-val" id="cn0Val">۴۴.۸ dB-Hz</div>
-      <div class="telemetry-status">● سیگنال تمیز و بدون امواج فریب</div>
-    </div>
-    <div class="telemetry-box">
-      <div class="telemetry-title">ارتباط HIL با شبیه‌ساز 6DOF Simulink</div>
-      <div class="telemetry-val">نرخ نوسازی: ۱۰۰۰ Hz</div>
-      <div class="telemetry-status" style="color: var(--purple);">● تأخیر حلقه بسته: ۰.۸ ms</div>
-    </div>
-  </div>
-
-  <div class="main-grid">
-    <div class="panel-card">
-      <div class="panel-header-row">
-        <h3>رادار و مانیتورینگ تاکتیکی مسیر واقعی (INS Fusion) در برابر سیگنال مخرب جَمینگ</h3>
-        <button class="test-btn" onclick="triggerJammingAttack()">تزریق حمله جَمینگ / اسپوفینگ (EW Attack)</button>
-      </div>
-      <canvas id="navCanvas"></canvas>
-    </div>
-
-    <div class="panel-card">
-      <div class="panel-header-row">
-        <h3>لاگ زنده تصمیم‌گیری سیستم خودمختار ضد جمر</h3>
-      </div>
-      <div class="terminal" id="navLogs">
-        <div>[سیستم] هسته ناوبری مقاوم ANFIS و فیلتر تطبیقی بارگذاری شد.</div>
-        <div>[سنسورها] پیوند داده‌های IMU شش‌محوره، بارومتر و GNSS برقرار است.</div>
-        <div>[HIL] ارتباط داده‌های دوقلوی دیجیتال با Simulink در وضعیت همگام.</div>
-        <div>[EW Monitor] طیف رادیویی نرمال؛ هیچ‌گونه تشعشع اخلال‌گر شناسایی نشد.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="disclaimer-card">
-    <div class="disclaimer-title">بیانیه حقوقی و فنی سیستم (Demo Verification):</div>
-    <div class="disclaimer-text">
-      جهت ممانعت از کپی‌برداری غیرمجاز و حفظ حقوق مالکیت فکری، این نسخه ارائه‌شده صرفاً یک دمو با داده‌های نمونه و تقلیل‌یافته (Synthetic/Minimal) می‌باشد. در صورت ثبت سفارش صنعتی، پنل نهایی به‌صورت تکاملی توسعه یافته و از طریق پروتکل‌های سخت‌افزاری صنعتی (HIL) به لبه‌های هوش مصنوعی فدرال پردازشی واقعی (Real-Time Sensors Edge)، داده‌های مدل‌های شبیه‌ساز Simulink متصل می‌گردد تا کمترین ضریب خطا محاسبه نماید. و هر زمان پل واقعی Simulink/HIL و سنسورهای هوش مصنوعی لبه فدرال متصل شوند، سیستم آماده دریافت اطلاعات زنده خواهد بود.
-    </div>
-  </div>
-
-  <footer>
-    <div>
-      طراحی و توسعه مهندسی: <strong>حسین لعلیان؛ رتبه ۳۲ کنکور دکتری</strong>
-    </div>
-    <div>
-      رایانامه رسمی ارتباطات صنعتی: <a href="mailto:ai.algorithms.ballistics@gmail.com">ai.algorithms.ballistics@gmail.com</a>
-    </div>
-  </footer>
-
-  <script>
-    const canvas = document.getElementById('navCanvas');
-    const ctx = canvas.getContext('2d');
-    let width, height;
-
-    function resize() {
-      width = canvas.width = canvas.parentElement.clientWidth - 32;
-      height = canvas.height = 250;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    let angle = 0;
-    let isUnderJamming = false;
-    let jammingTimeLeft = 0;
-
-    // متغیرهای ره‌گیری مسیر
-    let trueTrail = [];
-    let spoofTrail = [];
-
-    function draw() {
-      ctx.clearRect(0, 0, width, height);
-
-      // رسم دایره‌های تاکتیکی رادار
-      const cx = width / 2;
-      const cy = height / 2;
-      const maxR = Math.min(width, height) * 0.45;
-
-      ctx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
-      ctx.lineWidth = 1;
-      for (let r = maxR / 3; r <= maxR; r += maxR / 3) {
-        ctx.beginPath();
-        ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        ctx.stroke();
-      }
-
-      // خطوط متقاطع قطب‌نما
-      ctx.beginPath();
-      ctx.moveTo(cx - maxR, cy);
-      ctx.lineTo(cx + maxR, cy);
-      ctx.moveTo(cx, cy - maxR);
-      ctx.lineTo(cx, cy + maxR);
-      ctx.stroke();
-
-      // خط جاروب رادار (Radar Sweep)
-      angle += 0.03;
-      ctx.strokeStyle = isUnderJamming ? 'rgba(239, 68, 68, 0.4)' : 'rgba(16, 185, 129, 0.4)';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(cx, cy);
-      ctx.lineTo(cx + Math.cos(angle) * maxR, cy + Math.sin(angle) * maxR);
-      ctx.stroke();
-
-      // محاسبه موقعیت پرنده حقیقی (مسیر امن به کمک ANFIS و INS)
-      const uavDist = maxR * 0.65;
-      const trueX = cx + Math.cos(angle * 0.4) * uavDist;
-      const trueY = cy + Math.sin(angle * 0.4) * (uavDist * 0.55);
-
-      trueTrail.push({x: trueX, y: trueY});
-      if (trueTrail.length > 35) trueTrail.shift();
-
-      // رسم رد مسیر واقعی پهپاد (سبز فیروزه‌ای)
-      ctx.strokeStyle = '#38bdf8';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      for (let i = 0; i < trueTrail.length; i++) {
-        if (i === 0) ctx.moveTo(trueTrail[i].x, trueTrail[i].y);
-        else ctx.lineTo(trueTrail[i].x, trueTrail[i].y);
-      }
-      ctx.stroke();
-
-      // آیکون پرنده حقیقی
-      ctx.fillStyle = '#10b981';
-      ctx.beginPath();
-      ctx.arc(trueX, trueY, 6, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = '#fff';
-      ctx.font = '11px sans-serif';
-      ctx.fillText('موقعیت حقیقی (ANFIS/INS)', trueX + 10, trueY - 5);
-
-      // اگر تحت حمله جَمینگ و اسپوفینگ باشد:
-      if (isUnderJamming) {
-        // ایجاد بردار سیگنال گمراه‌کننده (Spoofed GNSS)
-        const spoofX = trueX + Math.sin(Date.now() / 200) * 45 + 30;
-        const spoofY = trueY + Math.cos(Date.now() / 250) * 40 - 25;
-
-        spoofTrail.push({x: spoofX, y: spoofY});
-        if (spoofTrail.length > 25) spoofTrail.shift();
-
-        // رسم رد سیگنال فریب (قرمز)
-        ctx.strokeStyle = 'rgba(239, 68, 68, 0.7)';
-        ctx.setLineDash([4, 4]);
-        ctx.beginPath();
-        for (let i = 0; i < spoofTrail.length; i++) {
-          if (i === 0) ctx.moveTo(spoofTrail[i].x, spoofTrail[i].y);
-          else ctx.lineTo(spoofTrail[i].x, spoofTrail[i].y);
-        }
-        ctx.stroke();
-        ctx.setLineDash([]);
-
-        // نشانه‌گر فریب GNSS
-        ctx.fillStyle = '#ef4444';
-        ctx.beginPath();
-        ctx.arc(spoofX, spoofY, 5, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillText('سیگنال جعلی GNSS (طرد شد!)', spoofX + 8, spoofY + 12);
-      }
-
-      requestAnimationFrame(draw);
-    }
-    draw();
-
-    function triggerJammingAttack() {
-      if (isUnderJamming) return;
-      isUnderJamming = true;
-
-      // تغییر مقادیر گیج‌ها به حالت دفاع جنگ الکترونیک
-      document.getElementById('threatVal').innerText = 'حمله بحرانی (GNSS SPOOFING DETECTED)';
-      document.getElementById('threatVal').style.color = 'var(--rose)';
-      document.getElementById('modeVal').innerText = 'سوییچ اضطراری به INS + Optic Flow';
-      document.getElementById('modeVal').style.color = 'var(--purple)';
-      document.getElementById('cepVal').innerText = '۰.۹۵ متر (پایداری حفظ شد)';
-      document.getElementById('integrityVal').innerText = '۱۲.۴ ٪ (عدم اعتماد به ماهواره)';
-      document.getElementById('integrityVal').style.color = 'var(--rose)';
-      document.getElementById('cn0Val').innerText = '۱۸.۲ dB-Hz (نویز شدید)';
-      document.getElementById('cn0Val').style.color = 'var(--rose)';
-
-      const badge = document.getElementById('systemStateBadge');
-      badge.innerText = '● جنگ الکترونیک: GNSS ایزوله شد / فیلتر فازی فعال';
-      badge.style.background = 'rgba(239, 68, 68, 0.2)';
-      badge.style.color = '#ef4444';
-      badge.style.borderColor = 'rgba(239, 68, 68, 0.4)';
-
-      const log = document.getElementById('navLogs');
-      const time = new Date().toLocaleTimeString('fa-IR');
-      log.innerHTML = `<div>[${time}] <strong style="color:#ef4444">⚠️ اخطار پدافندی:</strong> سیگنال انحرافی (Meaconing/Spoofing) تشخیص داده شد!</div>
-      <div>[${time}] [ANFIS] ماهواره‌های آلوده بلافاصله از ماتریس کوواریانس کالمن فیلتر حذف شدند.</div>
-      <div>[${time}] [الگوریتم فراابتکاری] تخمین بایاس ژیروسکوپ و شتاب‌سنج‌ها در کسری از ثانیه همگرا شد.</div>` + log.innerHTML;
-
-      // بازگشت به وضعیت پایدار پس از خنثی‌سازی
-      setTimeout(() => {
-        isUnderJamming = false;
-        spoofTrail = [];
-        document.getElementById('threatVal').innerText = 'خنثی شد / امن (Secured)';
-        document.getElementById('threatVal').style.color = 'var(--emerald)';
-        document.getElementById('modeVal').innerText = 'تلفیقی مقاوم (Resilient Fused)';
-        document.getElementById('modeVal').style.color = '#fff';
-        document.getElementById('cepVal').innerText = '۰.۴۲ متر';
-        document.getElementById('integrityVal').innerText = '۹۶.۸ ٪';
-        document.getElementById('integrityVal').style.color = '#fff';
-        document.getElementById('cn0Val').innerText = '۴۳.۵ dB-Hz';
-        document.getElementById('cn0Val').style.color = '#fff';
-
-        badge.innerText = '● وضعیت ناوبری: امن (INS/GNSS Fused)';
-        badge.style.background = 'rgba(16, 185, 129, 0.15)';
-        badge.style.color = 'var(--emerald)';
-        badge.style.borderColor = 'rgba(16, 185, 129, 0.3)';
-
-        const resetTime = new Date().toLocaleTimeString('fa-IR');
-        log.innerHTML = `<div>[${resetTime}] [موفقیت] حمله جنگ الکترونیک با دقت ناوبری بالا بدون انحراف دفع شد.</div>` + log.innerHTML;
-      }, 9000);
-    }
-  </script>
-</body>
-</html>
+</section>
